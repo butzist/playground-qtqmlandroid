@@ -17,7 +17,7 @@ OTHER_FILES += \
     $$PWD/qt/android/widget/QmlTabHostListener.java
 
 java.files = $$PWD/qt
-java.path = $$[QT_INSTALL_PREFIX]/src/java
+java.path = $$[QT_INSTALL_PREFIX]/src/android/java/src
 INSTALLS += java
 
 contains(QT_CONFIG, private_tests) {   # -developer-build
