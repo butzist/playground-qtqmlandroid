@@ -13,4 +13,4 @@ make install INSTALL_ROOT=QtQml-Catalog
 androiddeployqt --input android-libcatalog.so-deployment-settings.json --output QtQml-Catalog --verbose --gradle QtQml-Catalog
 popd
 
-cp examples/android/catalog/PACKAGE/build/outputs/apk/QtQml-Catalog-debug.apk .
+cp examples/android/catalog/QtQml-Catalog/build/outputs/apk/QtQml-Catalog-debug.apk .
