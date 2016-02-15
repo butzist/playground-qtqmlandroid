@@ -4,6 +4,9 @@ QML wrappers for native Android controls.
 
 ## Introduction
 
+This project was forked from:
+https://github.com/qtproject/playground-qtqmlandroid
+
 This is a former Qt hackathon project born in November 2014.
 Credits for the original idea and the groundwork go to Attila Csipa:
 - http://achipa.blogspot.no/2014/11/qml-wrappers-for-native-android.html
@@ -11,19 +14,16 @@ Credits for the original idea and the groundwork go to Attila Csipa:
 
 ## Requirements
 
-- Qt 5.4 or later
-- Android 5.x
-- Gradle
+- Docker
 
 ## Installation
 
-Build and install like any Qt module.
+- Build and run Docker container
+  docker build -t qtqmlandroid docker/
+  docker run -ti --rm -v $PWD:/build -w /build qtqmlandroid
 
-## Qt Creator
-
-When building the example in Qt Creator, tick "Use Gradle" in
-
-    Projects -> Build & Run -> Build Steps -> Build Android APK
+- Execute build in container:
+  ./docker/build.sh
 
 ## Notes
 
