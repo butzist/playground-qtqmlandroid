@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rm -fr tools
+unset QMAKESPEC
 
 qmake qtqmlandroid.pro
 make -j2
