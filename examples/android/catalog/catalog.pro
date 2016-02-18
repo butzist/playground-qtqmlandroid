@@ -17,9 +17,5 @@ OTHER_FILES += \
     qml/PickerView.qml \
     qml/ProgressView.qml
 
-DISTFILES += \
-    android/build.gradle \
-    android/gradle/wrapper/gradle-wrapper.properties
-
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 QMLANDROID_PACKAGES = app support view widget

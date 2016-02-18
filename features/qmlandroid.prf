@@ -1,28 +1,26 @@
 isEmpty(QMLANDROID_PREFIX): \
-    QMLANDROID_PREFIX = $$[QT_INSTALL_PREFIX]
+    QMLANDROID_PREFIX = $$[QT_INSTALL_PREFIX]/src/qmlandroid
 
-pkg_paths = $$files($$QMLANDROID_PREFIX/src/java/qt/android/*)
+pkg_paths = $$files($$QMLANDROID_PREFIX/java/src/qt/android/*)
 for(pp, pkg_paths): \
     pkg_names += $$basename(pp)
 
 for(pkg, QMLANDROID_PACKAGES) {
-    pkg_path = $$QMLANDROID_PREFIX/src/java/qt/android/$$pkg
+    pkg_path = $$QMLANDROID_PREFIX/java/src/qt/android/$$pkg
     !exists($$pkg_path): \
         error("Unknown QML for Android package '$$pkg'. Available packages: $$pkg_names")
-    QMLANDROID_INPUT += $$pkg_path
+    
+    qmlandroid_sources_$${pkg}.files = $$pkg_path/*
+    qmlandroid_sources_$${pkg}.path = /src/java/qt/android/$$pkg
+    INSTALLS += qmlandroid_sources_$$pkg
 }
 
-defineReplace(qmlAndroidPkgOutputName) {
-    name = $$basename(1)
-    name = $$absolute_path($$name, $$OUT_PWD/android-build/src/qt/android/)
-    name = $$relative_path($$name, $$_PRO_FILE_PWD_)
-    return($${name})
+isEmpty(ANDROID_PACKAGE_SOURCE_DIR) {
+    ANDROID_PACKAGE_SOURCE_DIR = $$QMLANDROID_PREFIX/templates
+} else {
+    template_files = AndroidManifest.xml build.gradle
+    for(f, template_files) {
+        !exists($$ANDROID_PACKAGE_SOURCE_DIR/$$f): \
+            error("Missing file in Android package source directory: $$f")
+    }
 }
-
-qmlandroid.input = QMLANDROID_INPUT
-qmlandroid.output = ${QMAKE_FUNC_FILE_IN_qmlAndroidPkgOutputName}
-!contains(TEMPLATE, vc.*): qmlandroid.variable_out = PRE_TARGETDEPS
-qmlandroid.commands = ( $$sprintf($$QMAKE_MKDIR_CMD, ${QMAKE_FILE_OUT}) ) && $$QMAKE_COPY_DIR ${QMAKE_FILE_IN} ${QMAKE_FILE_OUT}
-qmlandroid.name = COPY ${QMAKE_FILE_IN}
-qmlandroid.CONFIG = no_link no_clean
-QMAKE_EXTRA_COMPILERS += qmlandroid

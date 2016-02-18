@@ -4,7 +4,6 @@ unset QMAKESPEC
 
 qmake qtqmlandroid.pro
 make -j2
-sudo make install
 
 pushd examples/android/catalog/
 qmake catalog.pro

@@ -1,7 +1,8 @@
 TEMPLATE = subdirs
 SUBDIRS += \
-    qmlandroid \
     imports \
+    qmlandroid \
+    templates \
     java
 
 imports.depends = qmlandroid
